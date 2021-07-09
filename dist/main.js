@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-08 23:40:31
- * @LastEditTime: 2021-07-09 21:06:34
+ * @LastEditTime: 2021-07-09 22:19:22
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \screeps\dist\main.js
@@ -9,6 +9,7 @@
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
+var roleRepair = require('role.repair');
 
 module.exports.loop = function () {
     
@@ -20,6 +21,15 @@ module.exports.loop = function () {
         }
     }  
     
+    // 自动孵化repair
+    var repairs = _.filter(Game.creeps, (creep) => creep.memory.role == 'repair');
+
+    if(repairs.length < 1) {
+        var newName = 'Repair' + Game.time;
+        console.log('Spawning new repair: ' + newName);
+        Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName,
+            {memory: {role: 'repair'}});
+    }
 
     // 自动孵化builder
     var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
@@ -85,6 +95,9 @@ module.exports.loop = function () {
         }
         if(creep.memory.role == 'builder') {
             roleBuilder.run(creep);
+        }
+        if(creep.memory.role == 'repair') {
+            roleRepair.run(creep);
         }
     }
 }
