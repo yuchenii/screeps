@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-07-08 23:40:31
+ * @LastEditTime: 2021-07-09 21:06:34
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \screeps\dist\main.js
+ */
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
@@ -10,19 +18,19 @@ module.exports.loop = function () {
             delete Memory.creeps[name];
             console.log('Clearing non-existing creep memory:', name);
         }
-    }
+    }  
+    
 
-    // 自动孵化harvester
-    var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
+    // 自动孵化builder
+    var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
 
-    if(harvesters.length < 3) {
-        var newName = 'Harvester' + Game.time;
-        console.log('Spawning new harvester: ' + newName);
+    if(builders.length < 4) {
+        var newName = 'Builder' + Game.time;
+        console.log('Spawning new builder: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName,
-            {memory: {role: 'harvester'}});
+            {memory: {role: 'builder'}});
     }
-    
-    
+
     // 自动孵化upgrader
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
 
@@ -33,16 +41,15 @@ module.exports.loop = function () {
             {memory: {role: 'upgrader'}});
     }
 
-    // 自动孵化builder
-    var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
+    // 自动孵化harvester
+    var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
 
-    if(builders.length < 3) {
-        var newName = 'Builder' + Game.time;
-        console.log('Spawning new builder: ' + newName);
+    if(harvesters.length < 2) {
+        var newName = 'Harvester' + Game.time;
+        console.log('Spawning new harvester: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName,
-            {memory: {role: 'builder'}});
+            {memory: {role: 'harvester'}});
     }
-
 
     if(Game.spawns['Spawn1'].spawning) {
         var spawningCreep = Game.creeps[Game.spawns['Spawn1'].spawning.name];
