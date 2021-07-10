@@ -1,4 +1,12 @@
 /*
+ * @Author: your name
+ * @Date: 2021-07-08 23:40:31
+ * @LastEditTime: 2021-07-10 01:20:24
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \screeps\dist\role.upgrader.js
+ */
+/*
  * Module code goes here. Use 'module.exports' to export things:
  * module.exports.thing = 'a thing';
  *
@@ -28,8 +36,8 @@ var roleUpgrader = {
         }
         else {
             var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
+            if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[1], {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         }
 	}

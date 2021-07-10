@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-09 21:23:41
- * @LastEditTime: 2021-07-09 22:11:27
+ * @LastEditTime: 2021-07-10 01:27:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \screeps\dist\role.repair.js
@@ -31,7 +31,6 @@ var roleRepair = {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
-            console.log("repairing: " + targets.length);
 	    }
 	    else {
 	        var sources = creep.room.find(FIND_SOURCES);
