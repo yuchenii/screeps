@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-08 23:40:31
- * @LastEditTime: 2021-07-10 20:02:13
+ * @LastEditTime: 2021-07-13 14:05:38
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \screeps\dist\main.js
@@ -24,7 +24,7 @@ module.exports.loop = function () {
     // 自动孵化repair
     var repairs = _.filter(Game.creeps, (creep) => creep.memory.role == 'repair');
 
-    if(repairs.length < 2) {
+    if(repairs.length < 3) {
         var newName = 'Repair' + Game.time;
         console.log('Spawning new repair: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName,
@@ -34,7 +34,7 @@ module.exports.loop = function () {
     // 自动孵化builder
     var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
 
-    if(builders.length < 2) {
+    if(builders.length < 1) {
         var newName = 'Builder' + Game.time;
         console.log('Spawning new builder: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK,CARRY,MOVE], newName,
