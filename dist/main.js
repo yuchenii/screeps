@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-08 23:40:31
- * @LastEditTime: 2021-07-13 14:05:38
+ * @LastEditTime: 2021-07-14 23:51:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \screeps\dist\main.js
@@ -70,20 +70,20 @@ module.exports.loop = function () {
             {align: 'left', opacity: 0.8});
     }
 
-    // var tower = Game.getObjectById('7d77e38c62e0cec584bd8057');
-    // if(tower) {
-    //     var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-    //         filter: (structure) => structure.hits < structure.hitsMax
-    //     });
-    //     if(closestDamagedStructure) {
-    //         tower.repair(closestDamagedStructure);
-    //     }
+    var tower = Game.getObjectById('60eb4150fd2b7c86eebb0702');
+    if(tower) {
+        var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
+            filter: (structure) => structure.hits < structure.hitsMax
+        });
+        if(closestDamagedStructure) {
+            tower.repair(closestDamagedStructure);
+        }
 
-    //     var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-    //     if(closestHostile) {
-    //         tower.attack(closestHostile);
-    //     }
-    // }
+        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        if(closestHostile) {
+            tower.attack(closestHostile);
+        }
+    }
 
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
