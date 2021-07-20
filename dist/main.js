@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-08 23:40:31
- * @LastEditTime: 2021-07-19 20:47:59
+ * @LastEditTime: 2021-07-19 21:12:59
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \screeps\dist\main.js
@@ -27,7 +27,7 @@ module.exports.loop = function () {
     if (repairs.length < 3) {
         var newName = 'Repair' + Game.time;
         console.log('Spawning new repair: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName, {
+        Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE, MOVE], newName, {
             memory: {
                 role: 'repair'
             }
@@ -40,7 +40,7 @@ module.exports.loop = function () {
     if (builders.length < 1) {
         var newName = 'Builder' + Game.time;
         console.log('Spawning new builder: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE], newName, {
+        Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName, {
             memory: {
                 role: 'builder'
             }
@@ -53,7 +53,7 @@ module.exports.loop = function () {
     if (upgraders.length < 3) {
         var newName = 'Upgrader' + Game.time;
         console.log('Spawning new upgrader: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE], newName, {
+        Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE], newName, {
             memory: {
                 role: 'upgrader'
             }
