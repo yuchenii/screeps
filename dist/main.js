@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-08 23:40:31
- * @LastEditTime: 2021-07-19 21:12:59
+ * @LastEditTime: 2021-07-21 18:21:32
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \screeps\dist\main.js
@@ -50,7 +50,7 @@ module.exports.loop = function () {
     // 自动孵化upgrader
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
 
-    if (upgraders.length < 3) {
+    if (upgraders.length < 1) {
         var newName = 'Upgrader' + Game.time;
         console.log('Spawning new upgrader: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE], newName, {
@@ -63,10 +63,10 @@ module.exports.loop = function () {
     // 自动孵化harvester
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
 
-    if (harvesters.length < 2) {
+    if (harvesters.length < 3) {
         var newName = 'Harvester' + Game.time;
         console.log('Spawning new harvester: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, CARRY, MOVE, MOVE], newName, {
+        Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE], newName, {
             memory: {
                 role: 'harvester'
             }

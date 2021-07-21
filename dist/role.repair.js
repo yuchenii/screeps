@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-09 21:23:41
- * @LastEditTime: 2021-07-10 01:27:36
+ * @LastEditTime: 2021-07-21 13:44:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \screeps\dist\role.repair.js
@@ -34,8 +34,8 @@ var roleRepair = {
 	    }
 	    else {
 	        var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
+            if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(sources[1], {visualizePathStyle: {stroke: '#ffaa00'}});
             }
 	    }
 	}
