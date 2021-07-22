@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-09 21:23:41
- * @LastEditTime: 2021-07-21 13:44:16
+ * @LastEditTime: 2021-07-22 16:05:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \screeps\dist\role.repair.js
@@ -21,16 +21,38 @@ var roleRepair = {
 	    }
 
 	    if(creep.memory.repairing) {
-            var targets = creep.room.find(FIND_STRUCTURES, {
-                filter: object => object.hits < object.hitsMax
-            });
-            targets.sort((a,b) => a.hits - b.hits);
+            // var targets = creep.room.find(FIND_STRUCTURES, {
+            //     filter: object => object.hits < object.hitsMax
+            // });
+            // targets.sort((a,b) => a.hits - b.hits);
             
+            // if(targets.length > 0) {
+            //     if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
+            //         creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+            //     }
+            // }
+            var targets = creep.room.find(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return (
+                        structure.structureType == STRUCTURE_TOWER ) &&
+                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 500;
+                }
+            });
             if(targets.length > 0) {
-                if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
+                if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
+            } else {
+                var targets = creep.room.find(FIND_STRUCTURES, {
+                filter: object => object.hits < object.hitsMax});
+                targets.sort((a,b) => a.hits - b.hits);
+                if(targets.length > 0) {
+                    if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                    }
+                }
             }
+
 	    }
 	    else {
 	        var sources = creep.room.find(FIND_SOURCES);

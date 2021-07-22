@@ -31,10 +31,18 @@ var roleHarvester = {
                 if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 }
+            }else{
+                // 没有目标时运输到Tower
+                var tower = Game.getObjectById('60eb4150fd2b7c86eebb0702');
+                if(tower.store.getFreeCapacity(RESOURCE_ENERGY) <= 0)
+                    tower = Game.getObjectById('60f75771f9f6602d55da9839');
+                if(tower.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
+                    if(creep.transfer(tower, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(tower, {visualizePathStyle: {stroke: '#ffffff'}});
+                    }
+                }
             }
-            // }else{
-            //     roleUpgrader.run(creep);
-            // }
+            
         }
     }
 

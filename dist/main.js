@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-08 23:40:31
- * @LastEditTime: 2021-07-21 18:21:32
+ * @LastEditTime: 2021-07-22 16:01:30
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \screeps\dist\main.js
@@ -24,10 +24,10 @@ module.exports.loop = function () {
     // 自动孵化repair
     var repairs = _.filter(Game.creeps, (creep) => creep.memory.role == 'repair');
 
-    if (repairs.length < 3) {
+    if (repairs.length < 2) {
         var newName = 'Repair' + Game.time;
         console.log('Spawning new repair: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE, MOVE], newName, {
+        Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, CARRY, MOVE, MOVE], newName, {
             memory: {
                 role: 'repair'
             }
@@ -50,7 +50,7 @@ module.exports.loop = function () {
     // 自动孵化upgrader
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
 
-    if (upgraders.length < 1) {
+    if (upgraders.length < 2) {
         var newName = 'Upgrader' + Game.time;
         console.log('Spawning new upgrader: ' + newName);
         Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE], newName, {
@@ -86,11 +86,36 @@ module.exports.loop = function () {
 
     var tower = Game.getObjectById('60eb4150fd2b7c86eebb0702');
     if (tower) {
-        var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: (structure) => structure.hits < structure.hitsMax
+        // var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
+        //     filter: (structure) => structure.hits < structure.hitsMax
+        // });
+        // if (closestDamagedStructure) {
+        //     tower.repair(closestDamagedStructure);
+        // }
+        var targets = tower.room.find(FIND_STRUCTURES, {
+            filter: object => object.hits < object.hitsMax
         });
-        if (closestDamagedStructure) {
-            tower.repair(closestDamagedStructure);
+        targets.sort((a,b) => a.hits - b.hits);
+        
+        if(targets.length > 0) {
+            tower.repair(targets[0]);
+        }
+
+        var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        if (closestHostile) {
+            tower.attack(closestHostile);
+        }
+    }
+
+    var tower = Game.getObjectById('60f75771f9f6602d55da9839');
+    if (tower) {
+        var targets = tower.room.find(FIND_STRUCTURES, {
+            filter: object => object.hits < object.hitsMax
+        });
+        targets.sort((a,b) => a.hits - b.hits);
+        
+        if(targets.length > 0) {
+            tower.repair(targets[0]);
         }
 
         var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
