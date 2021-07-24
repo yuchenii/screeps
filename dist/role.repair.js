@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-09 21:23:41
- * @LastEditTime: 2021-07-22 16:05:07
+ * @LastEditTime: 2021-07-23 17:22:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \screeps\dist\role.repair.js
@@ -35,7 +35,7 @@ var roleRepair = {
                 filter: (structure) => {
                     return (
                         structure.structureType == STRUCTURE_TOWER ) &&
-                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 500;
+                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                 }
             });
             if(targets.length > 0) {

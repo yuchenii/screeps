@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-08 23:40:31
- * @LastEditTime: 2021-07-22 16:01:30
+ * @LastEditTime: 2021-07-24 10:34:16
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \screeps\dist\main.js
@@ -53,7 +53,7 @@ module.exports.loop = function () {
     if (upgraders.length < 2) {
         var newName = 'Upgrader' + Game.time;
         console.log('Spawning new upgrader: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK, WORK, CARRY, MOVE], newName, {
+        Game.spawns['Spawn1'].spawnCreep([WORK, WORK, WORK, CARRY, MOVE], newName, {
             memory: {
                 role: 'upgrader'
             }
@@ -92,35 +92,53 @@ module.exports.loop = function () {
         // if (closestDamagedStructure) {
         //     tower.repair(closestDamagedStructure);
         // }
-        var targets = tower.room.find(FIND_STRUCTURES, {
-            filter: object => object.hits < object.hitsMax
-        });
-        targets.sort((a,b) => a.hits - b.hits);
-        
-        if(targets.length > 0) {
-            tower.repair(targets[0]);
-        }
 
         var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
         if (closestHostile) {
+            // 如果有敌人
             tower.attack(closestHostile);
+        }else if(tower.store.getFreeCapacity(RESOURCE_ENERGY) <= 300){
+            // 如果没有敌人，且能量大于700，修复
+            var targets = tower.room.find(FIND_STRUCTURES, {
+                filter: object => object.hits < object.hitsMax
+            });
+            targets.sort((a,b) => a.hits - b.hits);
+            
+            if(targets.length > 0) {
+                tower.repair(targets[0]);
+            }
         }
     }
 
     var tower = Game.getObjectById('60f75771f9f6602d55da9839');
     if (tower) {
-        var targets = tower.room.find(FIND_STRUCTURES, {
-            filter: object => object.hits < object.hitsMax
-        });
-        targets.sort((a,b) => a.hits - b.hits);
+        // var targets = tower.room.find(FIND_STRUCTURES, {
+        //     filter: object => object.hits < object.hitsMax
+        // });
+        // targets.sort((a,b) => a.hits - b.hits);
         
-        if(targets.length > 0) {
-            tower.repair(targets[0]);
-        }
+        // if(targets.length > 0) {
+        //     tower.repair(targets[0]);
+        // }
 
+        // var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        // if (closestHostile) {
+        //     tower.attack(closestHostile);
+        // }
         var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
         if (closestHostile) {
+            // 如果有敌人
             tower.attack(closestHostile);
+        }else if(tower.store.getFreeCapacity(RESOURCE_ENERGY) <= 300){
+            // 如果没有敌人，且能量大于700，修复
+            var targets = tower.room.find(FIND_STRUCTURES, {
+                filter: object => object.hits < object.hitsMax
+            });
+            targets.sort((a,b) => a.hits - b.hits);
+            
+            if(targets.length > 0) {
+                tower.repair(targets[0]);
+            }
         }
     }
 
