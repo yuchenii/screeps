@@ -33,9 +33,9 @@ var roleHarvester = {
                 }
             }else{
                 // 没有目标时运输到Tower
-                var tower = Game.getObjectById('60eb4150fd2b7c86eebb0702');
-                if(tower.store.getFreeCapacity(RESOURCE_ENERGY) <= 0)
-                    tower = Game.getObjectById('60f75771f9f6602d55da9839');
+                var tower = tower = Game.getObjectById('60f75771f9f6602d55da9839');
+                if(tower.store.getFreeCapacity(RESOURCE_ENERGY) < 400)
+                    tower = Game.getObjectById('60eb4150fd2b7c86eebb0702');
                 if(tower.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
                     if(creep.transfer(tower, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(tower, {visualizePathStyle: {stroke: '#ffffff'}});
