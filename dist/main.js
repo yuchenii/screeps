@@ -1,11 +1,11 @@
 /*
- * @Author: your name
+ * @Author: yuchen
  * @Date: 2021-07-08 23:40:31
- * @LastEditTime: 2021-07-30 21:05:19
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @LastEditTime: 2021-08-06 11:01:10
+ * @Description: 
  * @FilePath: \screeps\dist\main.js
  */
+
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
@@ -40,7 +40,7 @@ module.exports.loop = function () {
     if (builders.length < 1) {
         var newName = 'Builder' + Game.time;
         console.log('Spawning new builder: ' + newName);
-        Game.spawns['Spawn1'].spawnCreep([WORK, CARRY, MOVE, MOVE], newName, {
+        Game.spawns['Spawn1'].spawnCreep([WORK,WORK, CARRY, CARRY, MOVE, MOVE], newName, {
             memory: {
                 role: 'builder'
             }
